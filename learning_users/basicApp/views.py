@@ -48,13 +48,13 @@ def register(request):
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileInfoForm(data=request.POST)
 
-        if user_form.is_valid and profile_form.is_valid:
-            user=user_form.save()
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
             user.set_password(user.password)
             user.save()
 
             profile = profile_form.save(commit=False)
-            profile.user = user
+            profile.User = user
             
             if 'profile_pic'  in request.FILES:
                 profile.profile_pic = request.FILES['profile_pic']
